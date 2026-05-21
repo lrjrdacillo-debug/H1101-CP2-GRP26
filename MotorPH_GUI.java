@@ -6,14 +6,13 @@ import java.awt.event.ActionListener;
 public class MotorPH_GUI extends JFrame {
 
     // --- Phase 1: Structural Setup ---
-    // These layout managers allow us to switch between the Login and Dashboard screens.
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainContainer = new JPanel(cardLayout);
 
     public MotorPH_GUI() {
         // 1. Setup the Window
         setTitle("MotorPH Employee Management System");
-        setSize(800, 500); // Increased size for the wireframe layout
+        setSize(800, 600); // Slightly taller to fit all teammate fields
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // 2. Initialize the screens
@@ -32,7 +31,7 @@ public class MotorPH_GUI extends JFrame {
     // --- Phase 2: Login / Entry UI ---
     private JPanel createLoginPanel() {
         JPanel panel = new JPanel(new GridBagLayout()); // Centers the login box
-        JPanel loginBox = new JPanel(new GridLayout(4, 2, 10, 10));
+        JPanel loginBox = new JPanel(new GridLayout(5, 2, 10, 10));
 
         // Basic Login Components
         loginBox.add(new JLabel("Username:"));
@@ -43,7 +42,7 @@ public class MotorPH_GUI extends JFrame {
         JPasswordField passwordField = new JPasswordField(15);
         loginBox.add(passwordField);
 
-        // --- New Show Password Checkbox ---
+        // --- Show Password Checkbox ---
         loginBox.add(new JLabel("")); // Empty label for spacing
         JCheckBox showPassword = new JCheckBox("Show Password");
         loginBox.add(showPassword);
@@ -60,8 +59,8 @@ public class MotorPH_GUI extends JFrame {
             }
         });
 
-        JButton loginBtn = new JButton("Login");
         loginBox.add(new JLabel("")); // Empty label for spacing before button
+        JButton loginBtn = new JButton("Login");
         loginBox.add(loginBtn);
 
         // Event Handling: Validate and Switch to Dashboard
@@ -75,8 +74,7 @@ public class MotorPH_GUI extends JFrame {
                     // Show error if fields are blank
                     JOptionPane.showMessageDialog(panel, "Please enter both Username and Password.", "Login Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    // In a real app, you'd verify the actual credentials here.
-                    // For now, allow access if fields are not empty.
+                    // Switch to dashboard
                     cardLayout.show(mainContainer, "DASHBOARD_SCREEN");
                 }
             }
@@ -86,50 +84,70 @@ public class MotorPH_GUI extends JFrame {
         return panel;
     }
 
-private JPanel createDashboardPanel() {
-    JPanel panel = new JPanel(new BorderLayout(10, 10));
-    
-    // --- Top Header ---
-    JPanel headerPanel = new JPanel(new BorderLayout());
-    JLabel headerLabel = new JLabel("MotorPH Employee App", JLabel.CENTER);
-    headerLabel.setFont(new Font("Arial", Font.BOLD, 16));
-    
-    // The "Logout" Button
-    JButton logoutBtn = new JButton("Logout");
-    logoutBtn.addActionListener(e -> {
-        // Switch back to Login
-        cardLayout.show(mainContainer, "LOGIN_SCREEN");
-    });
+    // --- Phase 3: Main Navigation Frame & App Structure ---
+    private JPanel createDashboardPanel() {
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        
+        // --- Top Header ---
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.setBackground(new Color(230, 230, 230));
+        JLabel headerLabel = new JLabel(" MotorPH Employee App", JLabel.LEFT);
+        headerLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        
+        // The "Logout" Button
+        JButton logoutBtn = new JButton("Logout");
+        logoutBtn.addActionListener(e -> {
+            // Switch back to Login
+            cardLayout.show(mainContainer, "LOGIN_SCREEN");
+        });
 
-    headerPanel.add(headerLabel, BorderLayout.CENTER);
-    headerPanel.add(logoutBtn, BorderLayout.EAST); // Puts it in the top right corner
-    panel.add(headerPanel, BorderLayout.NORTH);
+        headerPanel.add(headerLabel, BorderLayout.CENTER);
+        headerPanel.add(logoutBtn, BorderLayout.EAST); // Puts it in the top right corner
+        panel.add(headerPanel, BorderLayout.NORTH);
 
-    // --- Center Area (Princess & Precious will work here) ---
-    JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-    
-    // Your existing Search components
-    JLabel label = new JLabel("Enter Employee ID:");
-    JTextField textField = new JTextField(15);
-    JButton searchButton = new JButton("Search");
+        // --- THE STRUCTURED GRID (FOR PRINCESS & PRECIOUS) ---
+        JPanel centerPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5); // Adds spacing between components
+        gbc.anchor = GridBagConstraints.WEST; // Aligns components to the left
 
-    searchButton.addActionListener(e -> {
-        JOptionPane.showMessageDialog(null, "Searching for Employee ID: " + textField.getText());
-    });
+        // Row 0: Search (Your Part)
+        gbc.gridx = 0; gbc.gridy = 0;
+        centerPanel.add(new JLabel("Employee ID:"), gbc);
+        
+        gbc.gridx = 1;
+        JTextField searchField = new JTextField(15);
+        centerPanel.add(searchField, gbc);
+        
+        gbc.gridx = 2;
+        JButton searchButton = new JButton("Search");
+        centerPanel.add(searchButton, gbc);
 
-    centerPanel.add(label);
-    centerPanel.add(textField);
-    centerPanel.add(searchButton);
-    
-    panel.add(centerPanel, BorderLayout.CENTER);
+        searchButton.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null, "Searching for Employee ID: " + searchField.getText());
+        });
 
-    // --- Bottom Footer ---
-    JLabel statusArea = new JLabel(" Status: Logged In", JLabel.LEFT);
-    statusArea.setBorder(BorderFactory.createEtchedBorder());
-    panel.add(statusArea, BorderLayout.SOUTH);
+        // Row 1 & 2: PLACEHOLDERS FOR PRINCESS (Employee Form UI)
+        gbc.gridx = 0; gbc.gridy = 1;
+        centerPanel.add(new JLabel("First Name: [Princess]"), gbc);
+        
+        gbc.gridy = 2;
+        centerPanel.add(new JLabel("Last Name: [Princess]"), gbc);
 
-    return panel;
-}
+        // Row 3: PLACEHOLDER FOR PRECIOUS (Buttons)
+        gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 3;
+        centerPanel.add(new JLabel("Actions: (Add/Update/Delete) [Precious]"), gbc);
+
+        panel.add(centerPanel, BorderLayout.CENTER);
+
+        // --- Bottom Footer ---
+        JLabel statusArea = new JLabel(" Status: Logged In | System Ready", JLabel.LEFT);
+        statusArea.setBorder(BorderFactory.createEtchedBorder());
+        panel.add(statusArea, BorderLayout.SOUTH);
+
+        return panel;
+    }
+
     public static void main(String[] args) {
         // Run the GUI on the Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
