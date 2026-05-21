@@ -16,7 +16,7 @@ public class AddButton {
         frame.add(deleteBtn);
         frame.add(clearBtn);
 
-        frame.setSize(500, 300);                 
+        frame.setSize(400, 300);                 
         frame.setLayout(new java.awt.FlowLayout());
         frame.setVisible(true); 
                           
