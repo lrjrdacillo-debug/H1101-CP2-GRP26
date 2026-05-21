@@ -129,14 +129,14 @@ public class MotorPH_GUI extends JFrame {
 
         // Row 1 & 2: PLACEHOLDERS FOR PRINCESS (Employee Form UI)
         gbc.gridx = 0; gbc.gridy = 1;
-        centerPanel.add(new JLabel("First Name: [Princess]"), gbc);
+        centerPanel.add(new JLabel("First Name: [Cp2test]"), gbc);
         
         gbc.gridy = 2;
-        centerPanel.add(new JLabel("Last Name: [Princess]"), gbc);
+        centerPanel.add(new JLabel("Last Name: [Cp2test]"), gbc);
 
         // Row 3: PLACEHOLDER FOR PRECIOUS (Buttons)
         gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 3;
-        centerPanel.add(new JLabel("Actions: (Add/Update/Delete) [Precious]"), gbc);
+        centerPanel.add(new JLabel("Actions: (Add/Update/Delete) [Cp2test]"), gbc);
 
         panel.add(centerPanel, BorderLayout.CENTER);
 
