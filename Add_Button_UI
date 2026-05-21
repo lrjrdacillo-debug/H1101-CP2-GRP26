@@ -1,4 +1,14 @@
-//In initialization code: 
-ImageIcon middleButtonIcon = createImageIcon("images/middle.gif");
+import javax.swing.*;
+
+public class AddButton {                         
+    public static void main(String[] args) {      
+        JFrame frame = new JFrame("Welcome");    
+        JButton button = new JButton("Click Me"); 
+
+        frame.add(button);                        
+        frame.setSize(500, 300);                  
+        frame.setLayout(new java.awt.FlowLayout());
+        frame.setVisible(true);                  
+    }
 }
 
