@@ -1,14 +1,25 @@
 import javax.swing.*;
 
-public class AddButton {                         
+public class AddButton {                        
     public static void main(String[] args) {      
-        JFrame frame = new JFrame("Welcome");    
-        JButton button = new JButton("Click Me"); 
+        JFrame frame = new JFrame("Welcome");     
+       frame.setLayout(new java.awt.FlowLayout()); 
 
-        frame.add(button);                        
-        frame.setSize(500, 300);                  
+        //
+        JButton addBtn = new JButton("Add");
+        JButton updateBtn = new JButton("Update");
+        JButton deleteBtn = new JButton("Delete");
+        JButton clearBtn = new JButton("Clear");
+
+        frame.add(addBtn); 
+        frame.add(updateBtn);
+        frame.add(deleteBtn);
+        frame.add(clearBtn);
+
+        frame.setSize(500, 300);                 
         frame.setLayout(new java.awt.FlowLayout());
-        frame.setVisible(true);                  
+        frame.setVisible(true); 
+                          
     }
 }
 
