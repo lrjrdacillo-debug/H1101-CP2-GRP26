@@ -1,0 +1,4 @@
+//In initialization code: 
+ImageIcon middleButtonIcon = createImageIcon("images/middle.gif");
+}
+
