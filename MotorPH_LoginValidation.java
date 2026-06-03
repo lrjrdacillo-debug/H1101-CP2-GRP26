@@ -3,13 +3,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MotorPH_GUI extends JFrame {
+public class MotorPH_LoginValidation extends JFrame {
 
     // --- Phase 1: Structural Setup ---
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainContainer = new JPanel(cardLayout);
 
-    public MotorPH_GUI() {
+    public MotorPH_LoginValidation() {
         // 1. Setup the Window
         setTitle("MotorPH Employee Management System");
         setSize(800, 600); // Slightly taller to fit all teammate fields
